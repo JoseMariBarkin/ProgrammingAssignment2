@@ -41,7 +41,6 @@ makeCacheMatrix <- function(x = matrix()) {
 ## the setinv function.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
     ## Return a matrix that is the inverse of 'x'
     # check if the inverse matrix is already cached
     inv <- x$getinv()
@@ -61,7 +60,10 @@ cacheSolve <- function(x, ...) {
 
 
 
-## Test
+###############################################
+#################### TESTS #################### 
+###############################################
+
 test = function(mat){
     temp = makeCacheMatrix(mat)
     
@@ -91,11 +93,12 @@ test(mat1)
 
 
 
-# Test your code
+# Test
 source("cachematrix.R")
 #
 # generate matrix, and the inverse of the matrix.
-size <- 1000 # size of the matrix edge, don't make this too big
+# size of the matrix edge
+size <- 1000 
 mymatrix <- matrix(rnorm(size^2), nrow=size, ncol=size)
 mymatrix.inverse <- solve(mymatrix)
 #
@@ -113,34 +116,5 @@ special.solved.2 <- cacheSolve(special.matrix)
 identical(mymatrix.inverse, special.solved.1) & identical(mymatrix.inverse, special.solved.2)
 #
 # should return TRUE
-
-
-
-
-
-
-
-
-# these additional tests should be run AFTER Jules' tests above
-# now let's call cacheSolve again but with a small variation
-
-special.solved.3 <- cacheSolve(special.matrix, rep(4,1000))
-
-# in this case you should NOT see the "getting cached data" message
-# because the parameters to CacheSolve changed even if the matrix is the same!
-
-identical(special.solved.1, special.solved.3)
-
-# should return FALSE
-
-special.solved.4 <- cacheSolve(special.matrix, rep(4,1000))
-
-# now you should get the cached result again
-
-identical(special.solved.3, special.solved.4)
-# should return TRUE
-
-
-
 
 
